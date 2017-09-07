@@ -1,4 +1,4 @@
-setwd("p:/gitprojects/exploratory-data-analysis-project1")
+## setwd("p:/gitprojects/exploratory-data-analysis-project1")
 
 dataCompressedFile <- "./household_power_consumption.zip"
 datafile <- "./household_power_consumption.txt"
