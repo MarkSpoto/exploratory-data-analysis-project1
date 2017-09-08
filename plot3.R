@@ -34,14 +34,28 @@ graphdata <- mutate(graphdata, DayOfWeek = wday(Date)) %>% mutate(DayOfWeekName 
 
 ## Create the plot diagram (dplyr does not allow POSIX date time therefore not mutated using strptime)
 xrange <- strptime(graphdata$RecordedDateTime, "%Y-%m-%d %H:%M:%S")  
-yrange <- graphdata$Global_active_power
 plot(xrange, 
-     yrange, 
+     graphdata$Sub_metering_1, 
      type = "l", 
      xlab = "",
-     ylab = "Global Active Power (kilowatts)")
+     ylab = "Energy sub metering")
+
+# plot the second point using lines which is plot with the default type="l"
+lines(xrange, 
+       graphdata$Sub_metering_2, 
+       col = "red")
+
+# plot the third point using plot which has to specify the type but same thing as lines
+points(xrange, 
+       graphdata$Sub_metering_3, 
+       type = "l", 
+       col = "blue")
+
+legend("topright", lty=1, lwd=2, cex=0.75,
+       col=c("black","red","blue"), 
+       legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"))
 
 ## Save the line plot to file as PNG
-dev.copy(png, file="./plot2.png", height=480, width=480)
+dev.copy(png, file="./plot3.png", height=480, width=480)
 dev.off()
 
