@@ -33,7 +33,7 @@ graphdata <- mutate(graphdata, RecordedDateTime = paste(Date, Time))
 graphdata <- mutate(graphdata, DayOfWeek = wday(Date)) %>% mutate(DayOfWeekName = wday(Date, label=TRUE))
 
 ## Define Multiplot layout
-par(mfrow = c(2,2), ps = 10)
+par(mfrow = c(2,2), ps = 10, mar=c(4,4,2,1), oma=c(0,0,2,0))
 
 ## Create the plot for Global active power in quandrant 1, 1
 xrange <- strptime(graphdata$RecordedDateTime, "%Y-%m-%d %H:%M:%S")  
@@ -67,9 +67,10 @@ points(xrange,
        type = "l", 
        col = "blue")
 
-legend("topright", lty=1, cex=0.50,
+legend("topright", lty=1, lwd=2, bty="n", text(font=list(family="Courier New", face=1:4)),
+       xjust=30, cex=0.85,
        col=c("black","red","blue"), 
-       legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"))
+       c("Sub_metering_1","Sub_metering_2","Sub_metering_3"))
 
 ## Create the plot for Global reactive power in quandrant 2, 2
 plot(xrange, 
